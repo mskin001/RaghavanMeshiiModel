@@ -1,3 +1,4 @@
+function [resin, zero, ten, ninty, fourtyfive, shear] = generateMaterialPropertyTables
 % These material properies are found in tables 1-10 in the paper "Creep of
 % polymer composites" by Raghavan and Meshii for use in the creep model of
 % the same name. Detailes about the meausrement of these properties can be
@@ -15,14 +16,14 @@ resin.tand = 0.627;
 zero.tand = 0.221;
 ten.tand = 0.131;
 ninty.tand = 0.208;
-fortyfive.tand = 0.242;
+fourtyfive.tand = 0.242;
 
 %% Activation energy in kJ/mol. Table 1
 resin.ae = 493;
 zero.ae = 504;
 ten.ae = 543;
 ninty.ae = 495;
-fortyfive.ae = 562;
+fourtyfive.ae = 562;
 
 %% Experimental tempearatures by fiber orientation
 % The order of temperature measurements corresponds to those in tables 2-6
@@ -90,7 +91,7 @@ ten.beta = [0.050 NaN NaN 0.124 0.122; 0.053 0.068 0.086 0.096 0.111]';
 ten.BRatio = [4.22e37 NaN NaN 4.19e37 4.57e37; 2.26e47 9.3e58 1.28e41 1.27e41 4.35e39]';
 
 
-
+end
 
 
 
