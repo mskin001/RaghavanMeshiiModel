@@ -9,6 +9,8 @@ width = 12.7; %mm
 thickness = 8; %mm
 
 % User input not necessary below this line. Ideally.
+
+
 %% Define material properties
 [resin, zero, ten, ninty, fourtyfive, shear] = generateMaterialPropertyTables;
 
@@ -34,3 +36,6 @@ sig.int = e.in * mat.rubber(pos);
 % sig.eff = effective stress. currently this is under the initial loading
 % conditions
 sig.eff = sig.app - sig.int;
+
+c = mean(mat.cu, mat.cl);
+nu.in = mat.temp(pos) * c * sig.eff^(-mat.d); % initial activation volume
