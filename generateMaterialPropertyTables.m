@@ -63,9 +63,11 @@ shear.vis = [14.02 12.66 12.02 11.51 10.99];
 resin.cu = 7.2e-22;
 resin.cl = 2.6e-22;
 resin.d = 1.057;
+
 ninty.cu = 7.2e-22;
 ninty.cl = 2.6e-22;
 ninty.d = 1.061;
+
 ten.cu = 3.5e-21;
 ten.cl = 3.6e-22;
 ten.d = 1.061;
