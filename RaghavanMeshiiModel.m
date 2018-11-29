@@ -37,5 +37,4 @@ sig.int = e.in * mat.rubber(pos);
 % conditions
 sig.eff = sig.app - sig.int;
 
-c = mean(mat.cu, mat.cl);
-nu.in = mat.temp(pos) * c * sig.eff^(-mat.d); % initial activation volume
+nu.in = mat.temp(pos) * mat.cl * sig.eff^(-mat.d); % initial activation volume
