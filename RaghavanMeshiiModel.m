@@ -4,7 +4,7 @@ sig.app = 15; %[MPa] applied stress at temperature = temp
 matSel = 'resin';
 
 %% Define rectangular test specimens
-length = 165; %mm
+oal = 165; %mm
 width = 12.7; %mm
 thickness = 8; %mm
 
@@ -20,7 +20,7 @@ elseif strcmp(matSel, 'zero')
   mat = zero;
 elseif strcmp(matSel, 'ten')
   mat = ten;
-else strcmp(matSel, 'ninty')
+else
   mat = ninty;
 end
 
