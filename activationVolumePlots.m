@@ -25,14 +25,6 @@ for k = 1:3
 end
 [rows,cols] = size(nuR);
 
-% for k = 1:cols
-%     figure(1)
-%     loglog(stress, nuR(:,k))
-%     hold on
-%
-%
-% end
-
 figure(1)
 loglog(stress,nuR)
 xlabel('Effective Stress: Pa')
