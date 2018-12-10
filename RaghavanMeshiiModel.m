@@ -3,6 +3,8 @@ temp = 295; %K
 sig.app = 15; %[MPa] applied stress at temperature = temp
 matSel = 'resin';
 k = 1.38064852e-23; %boltzmann's constant
+t = linspace(1,1000,1);
+
 %% Define rectangular test specimens
 oal = 165; %mm
 width = 12.7; %mm
@@ -28,10 +30,16 @@ end
 pos = find(mat.temp == temp);
 
 %% Calculate initial loading conditions.
-e.in = sig.app / mat.inst(pos); % e.in = initial strain
+e.in = zeros(3,3);
+% e.in = initial strain
+e.in(1,1) = sig.app / mat.inst(pos);
+e.in(1,2) = (mat.nu * sig.app) / mat.inst(pos);
+e.in(2,1) = e(1,2);
+e.in(2,2) = mat.nu * e.in(1,1);
+e.in(3,3) = sig.app / mat.shear(pos);
 % sig.int = internal stress. currently this value is under the initial
 % loading conditions
-sig.int = e.in * mat.rubber(pos);
+sig.int = e.in .* mat.rubber(pos);
 % sig.eff = effective stress. currently this is under the initial loading
 % conditions
 sig.eff.in = sig.app - sig.int;
@@ -42,4 +50,3 @@ b.in = mat.BRatio / (mat.beta(pos,2) * temp);
 eRate.int = b.in * sig.eff.in * (-log(sig.eff.in/sig.eff.in))^(1-1/mat.beta(pos,2))*...
             exp((mat.ae/(k*temp))) * sinh((nu.in*sig.eff.in)/(k*temp));
  % calculate compliance at time t = 0
- 

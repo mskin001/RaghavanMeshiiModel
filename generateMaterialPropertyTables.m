@@ -2,8 +2,10 @@ function [resin, zero, ten, ninty, fourtyfive, shear] = generateMaterialProperty
 % These material properies are found in tables 1-10 in the paper "Creep of
 % polymer composites" by Raghavan and Meshii for use in the creep model of
 % the same name. Detailes about the meausrement of these properties can be
-% found in the paper. 
+% found in the paper.
 
+%% Poisson's Ratio
+resin.nu = 0.31;
 %% Glass transition temperature in K. Table 1
 resin.Tg = 512;
 zero.Tg = 517;
@@ -58,7 +60,7 @@ ninty.vis = [13.04 11.98 11.60 11.21 8.01];
 shear.vis = [14.02 12.66 12.02 11.51 10.99];
 
 
-%% Power law constants used for fitting equation 14 in the paper. From 
+%% Power law constants used for fitting equation 14 in the paper. From
 % table 7
 resin.cu = 7.2e-22;
 resin.cl = 2.6e-22;
@@ -72,11 +74,11 @@ ten.cu = 3.5e-21;
 ten.cl = 3.6e-22;
 ten.d = 1.061;
 
-%% B and beta values for fiber angles at various temperatures. All values 
+%% B and beta values for fiber angles at various temperatures. All values
 % are measured at temperature in order 295, 373, 403, 433. These values are
 % from tables 8-10.
 
-% The resin only values are found at a creep stress of 5 and 15 MPa. The 
+% The resin only values are found at a creep stress of 5 and 15 MPa. The
 % first column corresponds to 5 MPa and the second column to 15 MPa.
 resin.beta = [NaN 0.061 0.066 0.059; 0.073 0.138 0.155 0.217]';
 resin.BRatio = [NaN 1.04e8 1.29e8 1.09e9; 2.99e31 2.89e31 2.98e31 3.07e31]';
@@ -88,22 +90,9 @@ ninty.BRatio = [6.43e20 9.6e21 9.0e20 3.96e20; 7.14e27 8.75e27 7.52e27 6.21e27]'
 
 % The 10 deg values are found at a creep stress of 15 and 28.9 MPa.
 % beta(1,2) and BRatio(1,2) are at 42 MPa. beta(2,2) and BRatio(2,2) are at
-% 66.3 MPa. beta(5,2) and BRatio(5,2) are at 20.8 MPa. 
+% 66.3 MPa. beta(5,2) and BRatio(5,2) are at 20.8 MPa.
 ten.beta = [0.050 NaN NaN 0.124 0.122; 0.053 0.068 0.086 0.096 0.111]';
 ten.BRatio = [4.22e37 NaN NaN 4.19e37 4.57e37; 2.26e47 9.3e58 1.28e41 1.27e41 4.35e39]';
 
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
