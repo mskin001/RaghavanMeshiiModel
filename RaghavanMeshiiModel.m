@@ -9,6 +9,8 @@ width = 12.7; %mm
 thickness = 8; %mm
 
 % User input not necessary below this line. Ideally.
+% Notation: _.in = initial condition for _ term
+%           _.int = internal condition for _ term.
 
 %% Define material properties
 [resin, zero, ten, ninty, fourtyfive, shear] = generateMaterialPropertyTables;
