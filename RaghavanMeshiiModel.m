@@ -30,13 +30,9 @@ end
 pos = find(mat.temp == temp);
 
 %% Calculate initial loading conditions.
-e.in = zeros(3,3);
-% e.in = initial strain
-e.in(1,1) = sig.app / mat.inst(pos);
-e.in(1,2) = (mat.nu * sig.app) / mat.inst(pos);
-e.in(2,1) = e(1,2);
-e.in(2,2) = mat.nu * e.in(1,1);
-e.in(3,3) = sig.app / mat.shear(pos);
+
+% e.in = initial strain in the loading direction
+e.in(1,1) = sig.app/mat.inst(pos);
 % sig.int = internal stress. currently this value is under the initial
 % loading conditions
 sig.int = e.in .* mat.rubber(pos);
