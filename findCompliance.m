@@ -14,14 +14,30 @@ function [s] = findCompliance(mat, strain, stress, deg)
 % Steps for finding the compliance: 1) find the strain in each direction 2) find
 % the stress in each direction 3) divide strain matrix by stress matrix.
 
+e = zeros(3,3);
 
 if isempty(deg)
-  % something
+  % Assumes only resin so material is istoropic.
   e(1,1) = strain;
-  
+  e(2,2) = e(1,1);
+  e(3,3) = e(1,1);
+
+elseif deg == 0
+  e(1,1) = strain;
+  e(2,2) = mat.nu * starin;
+  e(3,3) = mat.nu * starin;
+
+elseif deg == 90;
+  e(1,1) = mat.nu * strain;
+  e(2,2) = strain;
+  e(3,3) = mat.nu * strain;
+
 else
   %something else
-
+  error('This fiber angle has not been implemented yet')
 end
+
+s = e ./ stress;
+
 
 end
