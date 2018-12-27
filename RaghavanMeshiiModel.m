@@ -11,13 +11,16 @@ oal = 165; %mm
 width = 12.7; %mm
 thickness = 8; %mm
 
-%% Preallocate space
-s = zeros(t,3); % THe columns are [S11, S22, S33]
-
-
+%-------------------------------------------------------------------------------
 % User input not necessary below this line. Ideally.
-% Notation: _Ini = initial condition for _ term
-%           _Int = internal condition for _ term.
+%-------------------------------------------------------------------------------
+
+%% Preallocate space
+s = zeros(t,3); % Compliance matrix at all times, the columns are [S11, S22, S33]
+sInt = zeros(t,3); % Internal stress at all time during the experiment
+sEff = zeros(t,3); % Effective stress at all times during the experiment
+eRate = zeros(t,3); % Creep rate at all times during the experiment
+
 if deg ~= 90 && deg ~= 0 && ~isnan(deg)
   error('This fiber angle as not implemented. Acceptable deg are NaN, 90, 0');
 end
@@ -38,22 +41,15 @@ end
 pos = find(mat.temp == temp);
 
 %% Calculate initial loading conditions.
-% eIni = initial strain in the loading direction (e_11)
-eIni = sApp/mat.inst(pos);
-% sInt = internal stress. currently this value is under the initial
-% loading conditions
-sInt = eIni .* mat.rubber(pos);
-% sEffIni = effective initial stress. currently this is under the initial loading
-% conditions
-sEffIni = sApp - sInt;
+[eIni, sInt(1), sEff(1)] = currentLoad(mat, pos, sApp)
 
 %% Find the initial creep rate
 % Find activation volume
-nu.in = mat.temp(pos) * mat.cl * sEffIni^(-mat.d); % initial activation volume
+nu.in = mat.temp(pos) * mat.cl * sEff(1)^(-mat.d); % initial activation volume
 % calculate initial B and beta values based on temperature and applied stress
 b.in = mat.BRatio / (mat.beta(pos,2) * temp);
 % calculate initial strain rate
-eRate.int = b.in * sEffIni * (-log(sEffIni/sEffIni))^(1-1/mat.beta(pos,2))*...
-            exp((mat.ae/(k*temp))) * sinh((nu.in*sEffIni)/(k*temp));
+eRate(1) = b.in * sEff(1) * (-log(sEff(1)/sEff(1)))^(1-1/mat.beta(pos,2))*...
+            exp((mat.ae/(k*temp))) * sinh((nu.in*sEff(1))/(k*temp));
  % calculate compliance at time t = 0
-s(1,:) = findCompliance(mat, eIni, sEffIni, deg);
+s(1,:) = findCompliance(mat, eIni, sEff(1), deg);
