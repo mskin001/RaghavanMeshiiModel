@@ -51,5 +51,13 @@ b.in = mat.BRatio / (mat.beta(pos,2) * temp);
 % calculate initial strain rate
 eRate(1) = b.in * sEff(1) * (-log(sEff(1)/sEff(1)))^(1-1/mat.beta(pos,2))*...
             exp((mat.ae/(k*temp))) * sinh((nu.in*sEff(1))/(k*temp));
+
  % calculate compliance at time t = 0
 s(1,:) = findCompliance(mat, eIni, sEff(1), deg);
+
+for k = 2:length(t)
+  %Calculate stress, strain, and compliance for each time step
+
+
+
+end
