@@ -27,7 +27,7 @@ elseif deg == 0
   e(2) = mat.nu * starin;
   e(3) = mat.nu * starin;
 
-elseif deg == 90;
+elseif deg == 90
   e(1) = mat.nu * strain;
   e(2) = strain;
   e(3) = mat.nu * strain;
